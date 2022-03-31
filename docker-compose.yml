@@ -2,6 +2,15 @@ version: '3.7'
 
 services:
 
+  db:
+    container_name: db_mad_devs
+    image: postgres:12.0-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    networks:
+      - my-network
+    env_file:
+      - ./.env
 
   web:
     container_name: web_mad_devs
@@ -13,11 +22,33 @@ services:
         - media_volume:/app/media
         - ./:/app
     entrypoint: ./wsgi-entrypoint.sh
+    ports:
+      - "8000:8000"
     networks:
       - my-network
+    depends_on:
+      - db
+
+
+  nginx:
+    container_name: mad_devs_nginx
+    build:
+      context: ./docker/nginx
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - ./static/:/static
+      - ./media/:/media
+    networks:
+      - my-network
+    depends_on:
+      - db
+      - web
 
 
 volumes:
+  postgres_data:
   media_volume:
   static_volume:
 

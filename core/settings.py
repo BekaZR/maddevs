@@ -25,8 +25,6 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'rest_framework.authtoken',
-    # 'rest_framework_jwt',
-    # 'djoser',
 
     'mainapp',
 ]
@@ -61,24 +59,23 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'core.wsgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-
-}
-
 # DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": env("POSTGRES_DB"),
-#         "USER": env("POSTGRES_USER"),
-#         "PASSWORD": env("POSTGRES_PASSWORD"),
-#         "HOST": env("POSTGRES_HOST"),
-#         "PORT": 5432,
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": env("POSTGRES_DB"),
+        "USER": env("POSTGRES_USER"),
+        "PASSWORD": env("POSTGRES_PASSWORD"),
+        "HOST": env("POSTGRES_HOST"),
+        "PORT": 5432,
+    }
+}
 
 
 AUTH_USER_MODEL = "mainapp.User"
@@ -128,21 +125,10 @@ SIMPLE_JWT = {
 }
 
 
-
-# DJOSER = {
-#     'PASSWORD_RESET_CONFIRM_URL': '#/password/reset/confirm/{uid}/{token}',
-#     'USERNAME_RESET_CONFIRM_URL': '#/username/reset/confirm/{uid}/{token}',
-#     'ACTIVATION_URL': '#/activate/{uid}/{token}',
-#     'SEND_ACTIVATION_EMAIL': False,
-#     'SERIALIZERS': {},
-# }
-
-
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'mainapp.backends.JWTAuthentication',
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-        # 'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
         "rest_framework.authentication.BasicAuthentication",
         "rest_framework.authentication.SessionAuthentication",
     ),
@@ -163,29 +149,3 @@ STATIC_ROOT = BASE_DIR / 'static'
 
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# JWT_SECRET_KEY = env('JWT_SECRET_KEY')
-
-# JWT_AUTH = {
-#     'JWT_ENCODE_HANDLER': 'rest_framework_jwt.utils.jwt_encode_handler',
-#     'JWT_DECODE_HANDLER': 'rest_framework_jwt.utils.jwt_decode_handler',
-#     'JWT_PAYLOAD_HANDLER': 'rest_framework_jwt.utils.jwt_payload_handler',
-#     'JWT_PAYLOAD_GET_USER_ID_HANDLER': 'rest_framework_jwt.utils.jwt_get_user_id_from_payload_handler',
-#     'JWT_RESPONSE_PAYLOAD_HANDLER': 'rest_framework_jwt.utils.jwt_response_payload_handler',
-#     'JWT_SECRET_KEY': SECRET_KEY,
-#     'JWT_GET_USER_SECRET_KEY': None,
-#     'JWT_PUBLIC_KEY': None,
-#     'JWT_PRIVATE_KEY': None,
-#     'JWT_ALGORITHM': 'HS256',
-#     'JWT_VERIFY': True,
-#     'JWT_VERIFY_EXPIRATION': True,
-#     'JWT_LEEWAY': 0,
-#     'JWT_EXPIRATION_DELTA': timedelta(seconds=300000),
-#     'JWT_AUDIENCE': None,
-#     'JWT_ISSUER': None,
-#     'JWT_ALLOW_REFRESH': False,
-#     'JWT_REFRESH_EXPIRATION_DELTA': timedelta(days=7),
-#     'JWT_AUTH_HEADER_PREFIX': 'JWT',
-#     'JWT_AUTH_COOKIE': None,
-# }
-

@@ -5,7 +5,6 @@ WORKDIR /app
 ADD ./requirements.txt /app/
 RUN pip install --upgrade pip
 RUN pip install -r /app/requirements.txt
-ADD ./docker /app/docker
 ADD ./ /app/
-RUN ["chmod", "+x", "wsgi-entrypoint.sh"]
+RUN ["chmod", "777", "wsgi-entrypoint.sh"]
 EXPOSE 8000

@@ -14,10 +14,7 @@ class JWTAuthentication(authentication.BaseAuthentication):
         prefix, token = auth_data.decode("utf-8").split(" ")
         try:
             payload = jwt.decode(token, SECRET_KEY, algorithms="HS256")
-
             user = User.objects.get(id=payload["user_id"])
-            is_doctor = payload["is_doctor"]
-            print("\n\n\n\n\n", user, token, is_doctor, "\n\n\n\n\n")
             return (user, token)
 
         except jwt.DecodeError as identifier:
