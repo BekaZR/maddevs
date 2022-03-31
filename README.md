@@ -2,7 +2,7 @@
 
 # Start project:
   1) Start docker machine on your PC
-  2) Change main project directory
+  2) Change main project directory in terminal
   3) Enter command "sudo docker-compose up --build" in your terminal
   4) Go to localhost in your browser (without port 8000, nginx was connected)
   5) Project was successful started
