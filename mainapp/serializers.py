@@ -5,6 +5,9 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 
 class DiagnosesSerializer(serializers.ModelSerializer):
+    """ 
+    Serializer for model Diagnoses
+    """
     class Meta:
         model = Diagnoses
         fields = (
@@ -14,6 +17,10 @@ class DiagnosesSerializer(serializers.ModelSerializer):
 
 
 class PacientReadSerializer(serializers.ModelSerializer):
+    """ 
+    Serializer for model Pacient, for list method
+    """
+    # Add nested serializer for get diagnoses objects
     diagnoses = DiagnosesSerializer(many=True, read_only=True)
 
     class Meta:
@@ -28,6 +35,9 @@ class PacientReadSerializer(serializers.ModelSerializer):
 
 
 class PacientSerializer(serializers.ModelSerializer):
+    """ 
+    Serializer for model Pacient, for create method
+    """
     class Meta:
         model = Pacient
         fields = (
@@ -39,10 +49,14 @@ class PacientSerializer(serializers.ModelSerializer):
 
 
 class RegistrationSerializer(serializers.Serializer):
+    """ 
+    Serializer for user registration
+    """
     username = serializers.CharField()
     password = serializers.CharField(write_only=True)
     is_doctor = serializers.BooleanField(default=False)
 
+    # method validate for validation password
     def validated_password(self, value):
         if len(value) < 5:
             raise exceptions.ValidationError("Password is too short")
@@ -50,6 +64,7 @@ class RegistrationSerializer(serializers.Serializer):
             raise exceptions.ValidationError("Password is too long")
         return value
 
+    # Rewrite create method for user registration 
     def create(self, validated_data):
         if User.objects.filter(username=validated_data.get("username")).exists():
             raise exceptions.ValidationError(
@@ -68,6 +83,10 @@ class RegistrationSerializer(serializers.Serializer):
 
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    """ 
+    Rewrite TokenObtainPairSerializer for add field is_doctor
+    to encode JWT token
+    """
     @classmethod
     def get_token(cls, user):
         token = super(CustomTokenObtainPairSerializer, cls).get_token(user)

@@ -21,22 +21,33 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 
 
 class UserRefistrationCreateAPIView(CreateAPIView):
+    """
+    Create user registration view
+    """
     queryset = User.objects.all()
     serializer_class = RegistrationSerializer
 
 
 class DiagnosesViewSet(ModelViewSet):
+    """
+    Full crud diagnoses for pacients
+    """
     queryset = Diagnoses.objects.all()
     serializer_class = DiagnosesSerializer
 
 
 class PacientViewSet(ModelViewSet):
+    """ 
+    Create pacients and get 3 on action list
+    """
     queryset = Pacient.objects.all()[:3]
+    # create custom permission for user doctor
     permission_classes = (
         IsAuthenticated,
         IsDoctorOrReadOnly,
     )
 
+    # Rewrite method get_serializer_class for different action
     def get_serializer_class(self):
         if self.action == "create":
             return PacientSerializer
@@ -44,4 +55,7 @@ class PacientViewSet(ModelViewSet):
 
 
 class CustomTokenObtainPairView(TokenObtainPairView):
+    """ 
+    Rewrite class TokenObtainPairView for set custom serializer class
+    """
     serializer_class = CustomTokenObtainPairSerializer
