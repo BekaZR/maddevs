@@ -3,9 +3,10 @@
 # Start project:
   1) Start docker machine on your PC
   2) Change main project directory in terminal
-  3) Enter command "sudo docker-compose up --build" in your terminal
-  4) Go to localhost in your browser (without port 8000, nginx was connected)
-  5) Project was successful started
+  3) Create .env file early core directory by .env.example 
+  4) Enter command "sudo docker-compose up --build" in your terminal
+  5) Go to localhost in your browser (without port 8000, nginx was connected)
+  6) Project was successful started
 
 # API
   1) Go to **http://localhost/api/registration/** in Postman and set to body this
