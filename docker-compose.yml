@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+
+
+  web:
+    container_name: web_mad_devs
+    restart: unless-stopped
+    build:
+      context: .
+    volumes:
+        - static_volume:/app/static
+        - media_volume:/app/media
+        - ./:/app
+    entrypoint: ./wsgi-entrypoint.sh
+    networks:
+      - my-network
+
+
+volumes:
+  media_volume:
+  static_volume:
+
+networks:
+  my-network:
