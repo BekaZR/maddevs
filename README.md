@@ -48,6 +48,6 @@
      - Select GET method 
 
   6) For start tests 
-     - Run command sudo docker ps or sudo docker container ls
+     - Run command sudo docker ps or sudo docker container ls(when project in docker started)
      - Seach container with name **mad_devs_web** and copy his CONTAINER ID
-     - Run command sudo docker exec -it <<CONTAINER ID>> python manage.py test
+     - Run command sudo docker exec -it "CONTAINER ID" python manage.py test
