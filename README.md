@@ -4,7 +4,7 @@
   1) Start docker machine on your PC
   2) Change main project directory in terminal
   3) Create .env file near core directory by .env.example 
-  4) Enter command "sudo docker-compose up --build" in your terminal
+  4) Run command **"sudo docker-compose up --build"** in your terminal
   5) Go to localhost in your browser (without port 8000, nginx was connected)
   6) Project was successful started
 
@@ -48,6 +48,6 @@
      - Select GET method 
 
   6) For start tests 
-     - Run command sudo docker ps or sudo docker container ls(when project in docker started)
+     - Run command **"sudo docker ps"** or **"sudo docker container ls"**(when project in docker started)
      - Seach container with name **mad_devs_web** and copy his CONTAINER ID
-     - Run command sudo docker exec -it "CONTAINER ID" python manage.py test
+     - Run command **"sudo docker exec -it *CONTAINER ID* python manage.py test"**
