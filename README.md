@@ -47,4 +47,7 @@
      - If user is doctor you get list from 3 pacients
      - Select GET method 
 
-  6) For start tests run command ./manage.py test or python3 manage.py test
+  6) For start tests 
+     - Run command sudo docker ps or sudo docker container ls
+     - Seach container with name **mad_devs_web** and copy his CONTAINER ID
+     - Run command sudo docker exec -it <<CONTAINER ID>> python manage.py test
