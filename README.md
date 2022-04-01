@@ -3,7 +3,7 @@
 # Start project:
   1) Start docker machine on your PC
   2) Change main project directory in terminal
-  3) Create .env file early core directory by .env.example 
+  3) Create .env file near core directory by .env.example 
   4) Enter command "sudo docker-compose up --build" in your terminal
   5) Go to localhost in your browser (without port 8000, nginx was connected)
   6) Project was successful started
@@ -46,3 +46,5 @@
      - If user is not doctor you get error message about this
      - If user is doctor you get list from 3 pacients
      - Select GET method 
+
+  6) For start tests run command ./manage.py test or python3 manage.py test
